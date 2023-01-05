@@ -28,6 +28,31 @@ const register = (emailId, password) => {
         })
 }
 
-module.exports={
-    register
+const login = (emailId, password) => {
+    return dataBase.user.findOne({ emailId, password })
+        .then(user => {
+            if (user) {
+                return {
+                    status: "true",
+                    statusCode: 200,
+                    message: "Successfully login",
+                }
+
+            }
+            else {
+                return {
+                    status: "false",
+                    statusCode: 400,
+                    message: "Invalid User Details"
+
+                }
+
+            }
+
+        })
+}
+
+module.exports = {
+    register,
+    login
 }
